@@ -6,10 +6,11 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  baseURL: "https://check-mocha-three.vercel.app/api/auth",
+  baseURL:
+    process.env.BETTER_AUTH_URL || "https://check-mocha-three.vercel.app",
   trustedOrigins: [
     "https://check-front-pi.vercel.app",
-    process.env.APP_URL!,
+    process.env.APP_URL || "https://check-front-pi.vercel.app",
     "http://localhost:3000",
   ],
   user: {
