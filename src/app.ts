@@ -39,6 +39,15 @@ app.use("/api/adminDashboard-stats", dashboardRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/categories", categoryRouter);
 
+// Error handling middleware
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error("Error:", err);
+  res.status(err.status || 500).json({
+    error: err.message || "Internal Server Error",
+    ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
+  });
+});
+
 app.use(notFound);
 
 export default app;
