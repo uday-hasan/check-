@@ -15,11 +15,7 @@ const app: Application = express();
 //cors middleware
 app.use(
   cors({
-    origin: [
-      process.env.APP_URL || "https://check-front-pi.vercel.app",
-      "https://check-front-pi.vercel.app",
-      "http://localhost:3000",
-    ],
+    origin: "https://check-front-pi.vercel.app",
     credentials: true,
   }),
 );

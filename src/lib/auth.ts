@@ -3,17 +3,11 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./prisma.js";
 
 export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
-  secret: process.env.BETTER_AUTH_SECRET || "AALHVOxzaFu6YA1Fx4PxKMRc2EzKCG9H",
-  baseURL:
-    process.env.BETTER_AUTH_URL || "https://check-mocha-three.vercel.app",
-  trustedOrigins: [
-    "https://check-front-pi.vercel.app",
-    process.env.APP_URL || "https://check-front-pi.vercel.app",
-    "http://localhost:3000",
-  ],
+  database: prismaAdapter(prisma, { provider: "postgresql" }),
+  secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: "https://check-mocha-three.vercel.app/api/auth",
+  trustedOrigins: ["https://check-front-pi.vercel.app"],
+
   user: {
     additionalFields: {
       role: {
@@ -43,7 +37,8 @@ export const auth = betterAuth({
   },
   advanced: {
     cookiePrefix: "better-auth",
-    cookieSameSite: "none",
+    // When using Rewrites/Proxies, "lax" is often more stable than "none"
+    cookieSameSite: "Lax",
     useSecureCookies: true,
   },
 
