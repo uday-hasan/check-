@@ -6,7 +6,10 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: "https://check-front-pi.vercel.app/api/auth",
-  trustedOrigins: ["https://check-front-pi.vercel.app"],
+  trustedOrigins: [
+    "https://check-front-pi.vercel.app",
+    "https://check-mocha-three.vercel.app",
+  ],
 
   user: {
     additionalFields: {
@@ -31,8 +34,7 @@ export const auth = betterAuth({
 
   session: {
     cookieCache: {
-      enabled: true,
-      maxAge: 5 * 60, // 5 minutes
+      enabled: false,
     },
   },
   advanced: {
